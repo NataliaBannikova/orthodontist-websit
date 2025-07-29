@@ -353,15 +353,22 @@ body {
     margin: 0 auto;
 }
 
+.advantages-list {
+    text-align: center;
+}
+
 .advantage-items {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 }
 
+
 .advantage-item {
     display: flex;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     gap: 1rem;
 }
 
@@ -375,6 +382,7 @@ body {
     justify-content: center;
     color: white;
     flex-shrink: 0;
+    margin-bottom: 0.5rem;
 }
 
 .advantage-title {

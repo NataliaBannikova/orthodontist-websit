@@ -494,7 +494,9 @@ body {
 
 .contact-item {
     display: flex;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     gap: 1rem;
     padding: 1.5rem;
     background: rgba(255, 255, 255, 0.05);
@@ -513,10 +515,12 @@ body {
     justify-content: center;
     color: white;
     flex-shrink: 0;
+    margin-bottom: 1rem;
 }
 
 .contact-details {
     flex: 1;
+    text-align: center;
 }
 
 .contact-title {
@@ -553,7 +557,8 @@ body {
 .contact-social {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
 }
 
 .contact-social-title {
@@ -569,6 +574,7 @@ body {
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
     width: 100%;
+    justify-items: center;
 }
 
 .contact-social-link {
@@ -646,6 +652,8 @@ body {
 /* Contact Social */
 .contact-social {
     margin-top: 0rem;
+    align-items: center;
+    text-align: center;
 }
 
 .contact-social-title {
@@ -660,6 +668,7 @@ body {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .contact-social-link {
@@ -866,7 +875,7 @@ body {
     }
 
     .contact-social-links {
-        justify-content: left;
+        justify-content: center;
     }
     
     .btn {

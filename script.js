@@ -55,28 +55,37 @@ document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('.btn');
     buttons.forEach(button => {
         button.addEventListener('click', function(e) {
-            // Create ripple effect
+            // Create ripple effect with input sanitization
             const ripple = document.createElement('span');
             const rect = this.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
-            const x = e.clientX - rect.left - size / 2;
-            const y = e.clientY - rect.top - size / 2;
+            const size = Math.max(Math.abs(rect.width), Math.abs(rect.height));
             
-            ripple.style.width = ripple.style.height = size + 'px';
-            ripple.style.left = x + 'px';
-            ripple.style.top = y + 'px';
+            // Sanitize and validate coordinates
+            const clientX = typeof e.clientX === 'number' ? e.clientX : 0;
+            const clientY = typeof e.clientY === 'number' ? e.clientY : 0;
+            const x = Math.max(0, Math.min(clientX - rect.left - size / 2, rect.width));
+            const y = Math.max(0, Math.min(clientY - rect.top - size / 2, rect.height));
+            
+            // Use safe numeric values only
+            ripple.style.width = Math.abs(size) + 'px';
+            ripple.style.height = Math.abs(size) + 'px';
+            ripple.style.left = Math.abs(x) + 'px';
+            ripple.style.top = Math.abs(y) + 'px';
             ripple.classList.add('ripple');
             
             this.appendChild(ripple);
             
             setTimeout(() => {
-                ripple.remove();
+                if (ripple.parentNode) {
+                    ripple.remove();
+                }
             }, 600);
         });
     });
     
-    // Add parallax effect to hero section
-    window.addEventListener('scroll', function() {
+    // Add parallax effect to hero section with throttling
+    let isScrolling = false;
+    const parallaxEffect = () => {
         const scrolled = window.pageYOffset;
         const hero = document.querySelector('.hero');
         const rate = scrolled * -0.1;
@@ -84,24 +93,39 @@ document.addEventListener('DOMContentLoaded', function() {
         if (hero) {
             hero.style.transform = `translateY(${rate}px)`;
         }
-    });
+        isScrolling = false;
+    };
+    
+    const handleScroll = () => {
+        if (!isScrolling) {
+            requestAnimationFrame(parallaxEffect);
+            isScrolling = true;
+        }
+    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
     
     // Add counter animation for stats
     const animateCounters = () => {
         const counters = document.querySelectorAll('.stat-number');
         
         counters.forEach(counter => {
-            const target = parseInt(counter.textContent);
-            const increment = target / 100;
+            const originalText = counter.textContent;
+            const hasPlus = originalText.includes('+');
+            const hasPercent = originalText.includes('%');
+            const target = parseInt(originalText);
+            const increment = target / 60; // 60 frames for 1 second at 60fps
             let current = 0;
             
             const updateCounter = () => {
                 if (current < target) {
                     current += increment;
-                    counter.textContent = Math.ceil(current) + (counter.textContent.includes('+') ? '+' : '') + (counter.textContent.includes('%') ? '%' : '');
+                    const displayValue = Math.ceil(current);
+                    counter.textContent = displayValue + (hasPlus ? '+' : '') + (hasPercent ? '%' : '');
                     requestAnimationFrame(updateCounter);
                 } else {
-                    counter.textContent = counter.textContent; // Reset to original
+                    // Ensure final value is exactly the target
+                    counter.textContent = target + (hasPlus ? '+' : '') + (hasPercent ? '%' : '');
                 }
             };
             

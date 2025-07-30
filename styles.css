@@ -296,16 +296,23 @@ body {
     background: linear-gradient(135deg, #dcfce7, #bbf7d0);
 }
 
+.service-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
 .service-icon {
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
     background: #2563eb;
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    margin-bottom: 1.5rem;
+    flex-shrink: 0;
 }
 
 .service-card-gray .service-icon {
@@ -319,7 +326,7 @@ body {
 .service-title {
     font-size: 1.25rem;
     font-weight: 600;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
     color: #1e293b;
 }
 

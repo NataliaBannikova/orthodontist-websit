@@ -750,6 +750,9 @@ body {
     margin-bottom: 2rem;
 }
 
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
     /* Center layout adjustments */
     .advantages-list {
         text-align: center;

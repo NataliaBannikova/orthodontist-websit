@@ -791,6 +791,10 @@ body {
         text-align: center;
     }
 
+    .contact-social-title {
+        text-align: center;
+    }
+
   .contact-social-links {
       justify-items: center;
       justify-content: center;

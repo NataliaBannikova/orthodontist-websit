@@ -744,28 +744,32 @@ body {
     }
 
     .subsection-title {
-    margin-bottom: 3rem;
+        margin-bottom: 3rem;
+        text-align: center;
     }
 
     .check-icon {
         display: block;
-        position: relative;
-        top: 100%;
-        left: 50%;
-        transform: translateY(-120%);
+        margin: 0 auto 0.5rem;
+        position: static;
+        transform: none;
     }
 
     .education-details {
         margin-bottom: 10px;
+        text-align: center;
     }
 
     .education-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         margin: 0 auto;
     }
 
     .social-links {
-    margin-bottom: 2rem;
-}
+        margin-bottom: 2rem;
+    }
 
 
     .stats-grid {

@@ -214,9 +214,7 @@ body {
 .check-icon {
     width: 24px;
     height: 24px;
-    background: #2563eb;
-    color: white;
-    border-radius: 50%;
+    color: #1e293b;
     display: flex;
     align-items: center;
     justify-content: center;
